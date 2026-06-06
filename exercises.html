@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Упражнения | Критическое мышление</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/brain-icon.png">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="images/%D0%BB%D0%BE%D0%B3%D0%BE.jpg" alt="Логотип" class="logo-img">
+                <h1>Критическое мышление</h1>
+            </div>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="methods.html">Методики</a></li>
+                    <li><a href="exercises.html" class="active">Упражнения</a></li>
+                    <li><a href="resources.html">Ресурсы</a></li>
+                    <li><a href="register.html">Регистрация</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="exercises">
+            <div class="container">
+                <h2 class="section-title">Упражнения для развития критического мышления</h2>
+                
+                <div class="exercise-card">
+                    <h3>1. Анализ аргументов</h3>
+                    <p>Прочитайте утверждения и определите, являются ли они сильными аргументами:</p>
+                    <div class="arguments-list">
+                        <div class="argument-item">
+                            <p>"Все успешные люди рано встают, поэтому если ты хочешь быть успешным, тебе нужно вставать в 5 утра."</p>
+                            <button class="check-btn" data-explanation="Это ложная причинность. Успех не обязательно зависит от времени подъема.">Проверить</button>
+                            <div class="answer"></div>
+                        </div>
+                        <div class="argument-item">
+                            <p>"Исследования показывают, что люди, которые регулярно занимаются спортом, реже страдают от депрессии."</p>
+                            <button class="check-btn" data-explanation="Это сильный аргумент, основанный на исследованиях.">Проверить</button>
+                            <div class="answer"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise-card">
+                    <h3>2. Логические ошибки</h3>
+                    <p>Определите логические ошибки в утверждениях:</p>
+                    <div class="quiz-container">
+                        <div class="quiz-item">
+                            <p>"Все мои друзья используют этот продукт, значит он действительно хороший."</p>
+                            <div class="options">
+                                <button data-correct="true" data-explanation-correct="Правильно! Это ошибка «Все так делают»" data-explanation-wrong="Неверно. Здесь используется доверие к популярности." class="quiz-btn">Все так делают!</button>
+                                <button data-correct="false" data-explanation-correct="" data-explanation-wrong="Нет, это не ложная дилемма." class="quiz-btn">Либо так, либо никак</button>
+                                <button data-correct="false" data-explanation-correct="" data-explanation-wrong="Нет, это не путаница в словах." class="quiz-btn">Путаница в словах</button>
+                            </div>
+                            <div class="quiz-answer"></div>
+                        </div>
+
+                        <div class="quiz-item">
+                            <p>Мама говорит: "Если ты сегодня не сделаешь домашнюю работу по математике, то получишь двойку, потом не сдашь экзамен, не поступишь в институт, не найдешь хорошую работу и будешь жить под мостом!"</p>
+                            <div class="options">
+                                <button data-correct="false" data-explanation-correct="" data-explanation-wrong="Нет, это не так сказал взрослый." class="quiz-btn">Так сказал взрослый!</button>
+                                <button data-correct="true" data-explanation-correct="Правильно! Это ошибка «Сначала немного, потом все больше»." data-explanation-wrong="Неверно. Подумайте о цепочке событий." class="quiz-btn">Сначала немного, потом всё больше!</button>
+                                <button data-correct="false" data-explanation-correct="" data-explanation-wrong="Нет, это не одно и тоже по кругу." class="quiz-btn">Одно и то же по кругу</button>
+                            </div>
+                            <div class="quiz-answer"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise-card">
+                    <h3>3. Анализ новостей</h3>
+                    <p>Прочитайте новость и ответьте на вопросы:</p>
+                    <div class="news-exercise">
+                        <blockquote>
+                            "Учёные обнаружили, что люди, которые едят шоколад каждый день, имеют более низкий индекс массы тела. Исследование проводилось среди 1000 человек в течение 5 лет."
+                        </blockquote>
+                        <div class="news-questions">
+                            <div class="question">
+                                <p>1. Какие вопросы вы бы задали, чтобы оценить достоверность этого исследования?</p>
+                                <textarea id="news-answer" class="answer-field" placeholder="Ваш ответ..."></textarea>
+                                <div class="news-buttons">
+                                    <button class="submit-btn" id="submit-news-answer">Отправить ответ</button>
+                                    <button class="show-sample-btn" data-sample="Кто финансировал исследование? Как выбирались участники? Контролировались ли другие факторы? Каков механизм влияния?">Помощь</button>
+                                </div>
+                                <div id="news-feedback" class="news-feedback"></div>
+                                <div class="sample-answer"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            
+<!-- Упражнение 4: Факт или мнение -->
+<div class="exercise-card">
+    <h3>4. Факт или мнение? 🧐</h3>
+    <p>Определите, является ли утверждение объективным фактом или субъективным мнением.</p>
+    <div id="factOpinionQuiz" class="fact-opinion-container">
+        <!-- Сюда будут подгружаться вопросы через JS -->
+    </div>
+    <div id="factOpinionResult" class="quiz-result" style="display: none; margin-top: 20px; padding: 15px; background: #e8f4fc; border-radius: 12px;"></div>
+    <div style="display: flex; gap: 15px; justify-content: center; margin-top: 20px;">
+        <button id="submitFactOpinion" class="cta-button" style="background: var(--gradient-primary);">🎯 Завершить тест</button>
+        <button id="resetFactOpinion" class="reset-fact-btn" style="background: #e0e0e0; color: #333; padding: 12px 28px; border-radius: 40px; border: none; cursor: pointer; font-weight: 600; transition: var(--transition);">🔄 Начать заново</button>
+    </div>
+</div>
+                
+                <!-- Упражнение 5: Сортировка аргументов -->
+<div class="exercise-card">
+    <h3>5. Сортировка аргументов 🎯</h3>
+    <p>Перетащите каждый аргумент в правильную колонку: сильный или слабый.</p>
+    
+    <div class="drag-drop-container">
+        <!-- Список аргументов для перетаскивания -->
+        <div class="drag-items" id="dragItems">
+            <div class="drag-item" data-type="strong" data-explanation="Основано на авторитетном источнике и статистике">📊 По данным ВОЗ, регулярная ходьба снижает риск сердечных заболеваний на 30%</div>
+            <div class="drag-item" data-type="weak" data-explanation="Это аргумент к популярности — ошибка «все так делают»">👥 Все мои друзья пользуются этим приложением, значит оно лучшее</div>
+            <div class="drag-item" data-type="strong" data-explanation="Научное исследование с конкретными данными">🔬 Исследование 10 000 человек показало, что 8 часов сна улучшают память на 25%</div>
+            <div class="drag-item" data-type="weak" data-explanation="Ложная причинно-следственная связь (post hoc ergo propter hoc)">🌙 После того как я начал носить красную рубашку, наша команда выиграла 5 матчей подряд</div>
+            <div class="drag-item" data-type="strong" data-explanation="Основано на реальных историях и фактах">📖 Известны случаи, когда люди выживали в авиакатастрофах благодаря пристёгнутым ремням</div>
+            <div class="drag-item" data-type="weak" data-explanation="Это оскорбление вместо аргумента (argumentum ad hominem)">😤 Ты не разбираешься в экономике, потому что тебе всего 20 лет</div>
+        </div>
+        
+        <!-- Колонки для сброса -->
+        <div class="drop-zones">
+            <div class="drop-zone" data-expected="strong">
+                <div class="drop-zone-title">✅ Сильные аргументы</div>
+                <div class="drop-zone-items" id="strongZone"></div>
+            </div>
+            <div class="drop-zone" data-expected="weak">
+                <div class="drop-zone-title">⚠️ Слабые аргументы (ошибки)</div>
+                <div class="drop-zone-items" id="weakZone"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="drag-result" id="dragResult" style="display: none; margin-top: 20px; padding: 15px; background: #e8f4fc; border-radius: 12px;"></div>
+    <button id="checkDragResult" class="cta-button" style="margin-top: 20px; background: var(--gradient-primary);">🏆 Проверить результат</button>
+    <button id="resetDragGame" class="reset-btn" style="margin-top: 10px; background: #e0e0e0; color: #333; padding: 10px 24px; border-radius: 40px; border: none; cursor: pointer;">🔄 Начать заново</button>
+</div>
+                
+                <!-- Упражнение 6: Шкала достоверности -->
+<div class="exercise-card">
+    <h3>6. Шкала достоверности 📊</h3>
+    <p>Оцените, насколько вы доверяете каждому утверждению. Передвиньте ползунок от 0% (полное недоверие) до 100% (полное доверие).</p>
+    <div id="credibilityQuiz" class="credibility-container">
+        <!-- Сюда будут подгружаться вопросы через JS -->
+    </div>
+    <div id="credibilityResult" class="quiz-result" style="display: none; margin-top: 20px; padding: 15px; background: #e8f4fc; border-radius: 12px;"></div>
+    <div style="display: flex; gap: 15px; justify-content: center; margin-top: 20px;">
+        <button id="submitCredibility" class="cta-button" style="background: var(--gradient-primary);">🎯 Завершить тест</button>
+<button id="resetCredibility" class="reset-cred-btn" style="background: #e0e0e0; color: #333; padding: 12px 28px; border-radius: 40px; border: none; cursor: pointer; font-weight: 600; transition: var(--transition);">🔄 Начать заново</button>
+    </div>
+</div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Развитие критического мышления. Коровкина Анна. 4-ВК-9.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

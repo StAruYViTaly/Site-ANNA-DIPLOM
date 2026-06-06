@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация | Критическое мышление</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/brain-icon.png">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="images/%D0%BB%D0%BE%D0%B3%D0%BE.jpg" alt="Логотип" class="logo-img">
+                <h1>Критическое мышление</h1>
+            </div>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="methods.html">Методики</a></li>
+                    <li><a href="exercises.html">Упражнения</a></li>
+                    <li><a href="resources.html">Ресурсы</a></li>
+                    <li><a href="register.html" class="active">Регистрация</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div style="margin-bottom: 20px;">
+                <a href="index.html" style="color: var(--primary); text-decoration: none;">Главная</a> / Регистрация
+            </div>
+
+            <div class="register-container">
+                <div class="register-header">
+                    <h2>✨ Создание аккаунта ✨</h2>
+                    <p>Присоединяйтесь к сообществу критического мышления</p>
+                </div>
+
+                <div class="register-form">
+                    <div id="registerAlert" class="register-alert"></div>
+
+                    <form id="registerForm">
+                        <div class="form-group">
+                            <label for="fullname">ФИО *</label>
+                            <input type="text" id="fullname" name="fullname" placeholder="Иванов Иван Иванович" required>
+                            <div class="error-message" id="fullname-error">Пожалуйста, укажите ваши ФИО</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Номер телефона *</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+7 (XXX) XXX-XX-XX" required>
+                            <div class="error-message" id="phone-error">Введите корректный номер телефона</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" placeholder="example@mail.ru" required>
+                            <div class="error-message" id="email-error">Введите корректный email адрес</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Пароль *</label>
+                            <input type="password" id="password" name="password" placeholder="Минимум 6 символов" required>
+                            <div class="error-message" id="password-error">Пароль должен содержать минимум 6 символов</div>
+                            <div class="password-hint">Пароль должен содержать не менее 6 символов</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirm_password">Подтверждение пароля *</label>
+                            <input type="password" id="confirm_password" name="confirm_password" placeholder="Повторите пароль" required>
+                            <div class="error-message" id="confirm-error">Пароли не совпадают</div>
+                        </div>
+
+                        <button type="submit" class="register-btn" id="registerBtn">Зарегистрироваться</button>
+
+                        <div class="login-link">
+                            Уже есть аккаунт? <a href="#">Войти</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Развитие критического мышления. Коровкина Анна. 4-ВК-9.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
