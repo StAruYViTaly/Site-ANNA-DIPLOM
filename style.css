@@ -1499,7 +1499,69 @@ body::after {
 .qr-hint span {
     margin-right: 5px;
 }
+/* ========== РЕКОМЕНДАЦИИ ДЛЯ РОДИТЕЛЕЙ ========== */
+.parents-tips {
+    margin-top: 60px;
+    padding-top: 20px;
+}
 
+.tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.tip-card {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    padding: 30px 25px;
+    text-align: center;
+    transition: var(--transition);
+    box-shadow: var(--box-shadow);
+    border: 1px solid rgba(108, 99, 255, 0.1);
+}
+
+.tip-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--box-shadow-hover);
+    border-color: var(--primary);
+}
+
+.tip-icon {
+    font-size: 48px;
+    margin-bottom: 20px;
+    display: inline-block;
+    animation: gentleBounce 3s ease-in-out infinite;
+}
+
+@keyframes gentleBounce {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+}
+
+.tip-card h3 {
+    font-size: 1.3rem;
+    color: var(--primary);
+    margin-bottom: 15px;
+}
+
+.tip-card p {
+    color: var(--text-light);
+    line-height: 1.5;
+    font-size: 0.95rem;
+}
+
+/* Адаптивность для рекомендаций */
+@media (max-width: 768px) {
+    .tips-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .tip-card {
+        padding: 25px 20px;
+    }
+}
 /* Адаптивность */
 @media (max-width: 768px) {
     .qr-section {
