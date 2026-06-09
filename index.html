@@ -141,7 +141,6 @@
 <section class="qr-section">
     <div class="container">
         <div class="qr-center">
-            <div class="qr-glow"></div>
             <div class="qr-content">
                 <div class="qr-icon-animation">
                     <span>📱</span>
@@ -152,16 +151,16 @@
                 <p class="qr-description">Наведите камеру телефона, чтобы открыть сайт<br>на мобильном устройстве</p>
                 
                 <div class="qr-image-wrapper">
-                    <img src="qrcode.png" alt="QR-код сайта" class="qr-image">
+                    <div id="liveQR" class="qr-live-container"></div>
                     <div class="qr-pulse"></div>
                 </div>
                 
-                <a href="qrcode.png" download="qrcode-site.png" class="qr-download-btn">
+                <button id="downloadQRBtn" class="qr-download-btn">
                     <span>💾</span> Скачать QR-код
-                </a>
+                </button>
                 
                 <p class="qr-hint">
-                    <span>💡</span> Сохраните QR-код или распечатайте для диплома
+                    <span>💡</span> QR-код сгенерирован автоматически под текущий адрес сайта
                 </p>
             </div>
         </div>
