@@ -1444,6 +1444,32 @@ body::after {
     z-index: 1;
 }
 
+/* Живой QR-код (без внешних картинок) */
+.qr-live-container {
+    width: 220px;
+    height: 220px;
+    background: white;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+.qr-live-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 20px;
+}
+
+@media (max-width: 768px) {
+    .qr-live-container {
+        width: 180px;
+        height: 180px;
+    }
+}
+
 @keyframes pulse {
     0% {
         transform: translate(-50%, -50%) scale(0.95);
