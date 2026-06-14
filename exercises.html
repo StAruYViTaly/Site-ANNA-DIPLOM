@@ -7,13 +7,18 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="brain-icon.png">
     <style>
+        /* Дополнительные стили только для игр */
         .game-card {
             background: var(--white);
-            padding: 30px;
+            padding: 35px;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
             margin-bottom: 40px;
             transition: var(--transition);
+        }
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-hover);
         }
         .game-title {
             font-size: 1.6rem;
@@ -45,22 +50,83 @@
             font-size: 1rem;
             cursor: pointer;
             margin-top: 15px;
+            transition: var(--transition);
+        }
+        .simple-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(108,99,255,0.3);
         }
         .feedback-good { background: #d4edda; color: #155724; padding: 12px; border-radius: 12px; margin-top: 15px; display: none; }
         .feedback-bad { background: #f8d7da; color: #721c24; padding: 12px; border-radius: 12px; margin-top: 15px; display: none; }
-        .story-text { background: #f0f0f0; padding: 20px; border-radius: 20px; margin: 15px 0; font-size: 1.1rem; line-height: 1.5; }
-        .sequence-item {
-            font-size: 3rem;
-            background: #f0f0f0;
-            border-radius: 20px;
+        .story-text {
+            background: var(--gray);
             padding: 20px;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-align: center;
-            min-width: 80px;
+            border-radius: var(--border-radius-sm);
+            margin: 15px 0;
+            font-size: 1.1rem;
+            line-height: 1.5;
+            border-left: 5px solid var(--primary);
         }
-        .sequence-item:hover { background: #e0e0e0; transform: scale(1.05); }
-        .sequence-container { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin: 20px 0; }
+        
+        /* Стили для игры "Вижу. Думаю. Удивляюсь" */
+        .see-think-wonder-card {
+            background: linear-gradient(135deg, #f8f9ff, #f0f2f8);
+            border-radius: 24px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .see-think-wonder-image {
+            font-size: 5rem;
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 30px;
+            display: inline-block;
+            box-shadow: var(--box-shadow);
+        }
+        .stw-questions {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .stw-question {
+            background: white;
+            border-radius: 20px;
+            padding: 15px;
+            text-align: left;
+        }
+        .stw-question h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .stw-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 16px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            resize: vertical;
+            margin-top: 8px;
+        }
+        .stw-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        .stw-example {
+            font-size: 0.8rem;
+            color: #999;
+            margin-top: 8px;
+            cursor: pointer;
+        }
+        .stw-example:hover {
+            color: var(--primary);
+        }
     </style>
 </head>
 <body>
@@ -87,8 +153,8 @@
             <h2 class="section-title">🧠 Учимся думать! 🧠</h2>
             <p style="text-align: center; margin-bottom: 40px;">Игры для развития критического мышления (6+ лет)</p>
 
-            <!-- 1. ФАКТ ИЛИ МНЕНИЕ -->
-            <div class="game-card">
+            <!-- ИГРА 1: ФАКТ ИЛИ МНЕНИЕ -->
+            <div class="game-card" id="game1Card">
                 <div class="game-title"><span>🔍</span> <h3>Игра 1: Факт или мнение?</h3></div>
                 <p>Факт — это то, что правда для всех. Мнение — то, что думает один человек.</p>
                 <div id="game1Question" style="font-size: 1.2rem; margin: 15px 0;"></div>
@@ -98,8 +164,8 @@
                 <button id="game1Next" class="simple-btn" style="display: none;">➡️ Следующий</button>
             </div>
 
-            <!-- 2. НОВАЯ ИГРА: ВЕРЮ - НЕ ВЕРЮ (Оценка достоверности) -->
-            <div class="game-card">
+            <!-- ИГРА 2: ВЕРЮ - НЕ ВЕРЮ -->
+            <div class="game-card" id="game2Card">
                 <div class="game-title"><span>🤔</span> <h3>Игра 2: Верю - не верю</h3></div>
                 <p>Правда это или выдумка? Нажми на правильный ответ.</p>
                 <div id="game2Question" style="font-size: 1.2rem; margin: 15px 0;"></div>
@@ -109,8 +175,8 @@
                 <button id="game2Next" class="simple-btn" style="display: none;">➡️ Следующий</button>
             </div>
 
-            <!-- 3. ПОЧЕМУ? -->
-            <div class="game-card">
+            <!-- ИГРА 3: ПОЧЕМУ? -->
+            <div class="game-card" id="game3Card">
                 <div class="game-title"><span>❓</span> <h3>Игра 3: Почему это случилось?</h3></div>
                 <p>Прочитай историю и выбери правильную причину.</p>
                 <div id="game3Story" class="story-text"></div>
@@ -120,8 +186,8 @@
                 <button id="game3Next" class="simple-btn" style="display: none;">➡️ Дальше</button>
             </div>
 
-            <!-- 4. ЧТО ОБЩЕЕ? -->
-            <div class="game-card">
+            <!-- ИГРА 4: ЧТО ОБЩЕЕ? -->
+            <div class="game-card" id="game4Card">
                 <div class="game-title"><span>🔗</span> <h3>Игра 4: Что их объединяет?</h3></div>
                 <p>Найди, что общего у этих предметов.</p>
                 <div id="game4Items" style="font-size: 3rem; text-align: center; margin: 15px 0;"></div>
@@ -131,8 +197,8 @@
                 <button id="game4Next" class="simple-btn" style="display: none;">➡️ Следующее</button>
             </div>
 
-            <!-- 5. ПРАВДА ИЛИ ОБМАН? -->
-            <div class="game-card">
+            <!-- ИГРА 5: ПРАВДА ИЛИ ОБМАН? -->
+            <div class="game-card" id="game5Card">
                 <div class="game-title"><span>⚠️</span> <h3>Игра 5: Правда или обман?</h3></div>
                 <p>Может ли такое быть на самом деле?</p>
                 <div id="game5Question" style="font-size: 1.2rem; margin: 15px 0;"></div>
@@ -142,8 +208,8 @@
                 <button id="game5Next" class="simple-btn" style="display: none;">➡️ Следующий</button>
             </div>
 
-            <!-- 6. ЧТО ЛИШНЕЕ? -->
-            <div class="game-card">
+            <!-- ИГРА 6: ЧТО ЛИШНЕЕ? -->
+            <div class="game-card" id="game6Card">
                 <div class="game-title"><span>🧩</span> <h3>Игра 6: Что лишнее?</h3></div>
                 <p>Найди предмет, который не подходит к остальным.</p>
                 <div id="game6Items" style="font-size: 2.5rem; text-align: center; margin: 15px 0; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;"></div>
@@ -152,8 +218,8 @@
                 <button id="game6Next" class="simple-btn" style="display: none;">➡️ Следующий</button>
             </div>
 
-            <!-- 7. КТО ПРАВ? -->
-            <div class="game-card">
+            <!-- ИГРА 7: КТО ПРАВ? -->
+            <div class="game-card" id="game7Card">
                 <div class="game-title"><span>👥</span> <h3>Игра 7: Кто прав?</h3></div>
                 <p>Прочитай спор двух друзей. Кто рассуждает правильно?</p>
                 <div id="game7Story" class="story-text"></div>
@@ -163,8 +229,8 @@
                 <button id="game7Next" class="simple-btn" style="display: none;">➡️ Дальше</button>
             </div>
 
-            <!-- 8. ЧТО БУДЕТ ДАЛЬШЕ? -->
-            <div class="game-card">
+            <!-- ИГРА 8: ЧТО БУДЕТ ДАЛЬШЕ? -->
+            <div class="game-card" id="game8Card">
                 <div class="game-title"><span>🔮</span> <h3>Игра 8: Что будет дальше?</h3></div>
                 <p>Придумай логичное продолжение истории.</p>
                 <div id="game8Story" class="story-text"></div>
@@ -174,7 +240,18 @@
                 <button id="game8Next" class="simple-btn" style="display: none;">➡️ Дальше</button>
             </div>
 
-            <div class="game-card" style="text-align: center;">
+            <!-- ИГРА 9: ВИЖУ. ДУМАЮ. УДИВЛЯЮСЬ -->
+            <div class="game-card" id="game9Card">
+                <div class="game-title"><span>👁️</span> <h3>Игра: Вижу. Думаю. Удивляюсь</h3></div>
+                <p>Посмотри на картинку-загадку и ответь на вопросы.</p>
+                <div id="game9Container"></div>
+                <div id="game9Feedback" class="feedback-good"></div>
+                <div id="game9FeedbackBad" class="feedback-bad"></div>
+                <button id="game9Next" class="simple-btn" style="display: none;">➡️ Дальше</button>
+            </div>
+
+            <!-- ФИНИШ -->
+            <div class="game-card" style="text-align: center;" id="finishCard">
                 <div class="game-title" style="justify-content: center;"><span>🏆</span><h3>Молодец!</h3></div>
                 <p>Ты научился мыслить как настоящий детектив! 🕵️‍♂️</p>
             </div>
@@ -187,9 +264,10 @@
         </div>
     </footer>
 
+    <script src="script.js"></script>
     <script>
+        // Вся логика игр вынесена сюда, чтобы не конфликтовать с основным script.js
         (function() {
-            // Универсальная функция показа результата
             function showResult(elementGood, elementBad, isCorrect, goodMessage, badMessage) {
                 if (isCorrect) {
                     elementGood.innerHTML = goodMessage;
@@ -202,12 +280,12 @@
                 }
             }
 
-            // ========== ИГРА 1: ФАКТ ИЛИ МНЕНИЕ ==========
+            // ИГРА 1
             const game1Data = [
                 { text: "🐱 Кошки умеют мяукать.", correct: "fact", explanation: "Это факт! Все кошки мяукают." },
-                { text: "🍦 Мороженое — самая вкусная еда.", correct: "opinion", explanation: "Это мнение! Кому-то вкуснее пицца или суп." },
+                { text: "🍦 Мороженое — самая вкусная еда.", correct: "opinion", explanation: "Это мнение! Кому-то вкуснее пицца." },
                 { text: "☀️ Солнце встаёт утром.", correct: "fact", explanation: "Это факт! Солнце встаёт каждое утро." },
-                { text: "🎨 Синий цвет — самый красивый.", correct: "opinion", explanation: "Это мнение! Кому-то нравится красный или зелёный." },
+                { text: "🎨 Синий цвет — самый красивый.", correct: "opinion", explanation: "Это мнение!" },
             ];
             let game1Index = 0, game1Done = false;
             const g1Good = document.getElementById('game1Feedback');
@@ -215,8 +293,7 @@
             function renderGame1() {
                 document.getElementById('game1Question').innerHTML = game1Data[game1Index].text;
                 game1Done = false;
-                g1Good.style.display = 'none';
-                g1Bad.style.display = 'none';
+                g1Good.style.display = 'none'; g1Bad.style.display = 'none';
                 document.getElementById('game1Next').style.display = 'none';
             }
             function checkGame1(ans) {
@@ -230,19 +307,18 @@
             function nextGame1() {
                 game1Index++;
                 if (game1Index < game1Data.length) renderGame1();
-                else { document.getElementById('game1Next').style.display = 'none'; showResult(g1Good, g1Bad, true, '🎉 Молодец! Ты отличаешь факты от мнений!', ''); }
+                else { document.getElementById('game1Card').style.display = 'none'; renderGame2(); }
             }
             document.querySelectorAll('#game1Question + div .simple-option').forEach(btn => btn.onclick = () => checkGame1(btn.dataset.ans));
             document.getElementById('game1Next').onclick = nextGame1;
-            renderGame1();
-
-            // ========== ИГРА 2: ВЕРЮ - НЕ ВЕРЮ (НОВАЯ) ==========
+            
+            // ИГРА 2
             const game2Data = [
-                { text: "🐟 Рыбы умеют летать по небу.", correct: false, explanation: "Неправда! Рыбы плавают в воде." },
-                { text: "❄️ Зимой идёт снег.", correct: true, explanation: "Правда! Зимой выпадает снег." },
-                { text: "🐄 Коровы дают шоколадное молоко.", correct: false, explanation: "Неправда! Коровы дают белое молоко." },
-                { text: "☀️ Солнце светит днём.", correct: true, explanation: "Правда! Солнце светит днём." },
-                { text: "🍕 Пицца растёт на дереве.", correct: false, explanation: "Неправда! Пиццу делают из теста." },
+                { text: "🐟 Рыбы умеют летать.", correct: false, explanation: "Рыбы плавают в воде." },
+                { text: "❄️ Зимой идёт снег.", correct: true, explanation: "Зимой выпадает снег." },
+                { text: "🐄 Коровы дают шоколадное молоко.", correct: false, explanation: "Коровы дают белое молоко." },
+                { text: "☀️ Солнце светит днём.", correct: true, explanation: "Солнце светит днём." },
+                { text: "🍕 Пицца растёт на дереве.", correct: false, explanation: "Пиццу делают из теста." },
             ];
             let game2Index = 0, game2Done = false;
             const g2Good = document.getElementById('game2Feedback');
@@ -250,9 +326,9 @@
             function renderGame2() {
                 document.getElementById('game2Question').innerHTML = game2Data[game2Index].text;
                 game2Done = false;
-                g2Good.style.display = 'none';
-                g2Bad.style.display = 'none';
+                g2Good.style.display = 'none'; g2Bad.style.display = 'none';
                 document.getElementById('game2Next').style.display = 'none';
+                document.getElementById('game2Card').style.display = 'block';
             }
             function checkGame2(ans) {
                 if (game2Done) return;
@@ -265,17 +341,16 @@
             function nextGame2() {
                 game2Index++;
                 if (game2Index < game2Data.length) renderGame2();
-                else { document.getElementById('game2Next').style.display = 'none'; showResult(g2Good, g2Bad, true, '🎉 Отлично! Ты хорошо отличаешь правду от выдумок!', ''); }
+                else { document.getElementById('game2Card').style.display = 'none'; renderGame3(); }
             }
             document.querySelectorAll('#game2Question + div .simple-option').forEach(btn => btn.onclick = () => checkGame2(btn.dataset.ans));
             document.getElementById('game2Next').onclick = nextGame2;
-            renderGame2();
-
-            // ========== ИГРА 3: ПОЧЕМУ? ==========
+            
+            // ИГРА 3
             const game3Data = [
-                { story: "Маша взяла зонтик, когда выходила на улицу.", options: ["Потому что был дождь ☔", "Потому что хотела поиграть", "Потому что был ветер"], correct: 0, explanation: "Зонтик берут, когда идёт дождь." },
-                { story: "Вова надел тёплую куртку.", options: ["Потому что было жарко", "Потому что на улице холодно ❄️", "Потому что куртка красивая"], correct: 1, explanation: "Тёплую куртку надевают, когда холодно." },
-                { story: "Котёнок начал громко мяукать у миски.", options: ["Потому что он хочет спать", "Потому что он хочет есть 🐟", "Потому что он играет"], correct: 1, explanation: "Котёнок мяукает у миски, когда хочет есть." },
+                { story: "🌧️ Маша взяла зонтик.", options: ["Был дождь ☔", "Хотела поиграть", "Был ветер"], correct: 0, explanation: "Зонтик берут, когда дождь." },
+                { story: "❄️ Вова надел тёплую куртку.", options: ["Было жарко", "На улице холодно ❄️", "Куртка красивая"], correct: 1, explanation: "Куртку надевают, когда холодно." },
+                { story: "🐱 Котёнок мяукает у миски.", options: ["Хочет спать", "Хочет есть 🐟", "Играет"], correct: 1, explanation: "Котёнок хочет есть." },
             ];
             let game3Index = 0, game3Done = false;
             const g3Good = document.getElementById('game3Feedback');
@@ -292,30 +367,24 @@
                     btn.onclick = () => {
                         if (game3Done) return;
                         const isCorrect = (idx === q.correct);
-                        showResult(g3Good, g3Bad, isCorrect, `✅ Правильно! ${q.explanation}`, `❌ Неправильно! ${q.explanation}`);
+                        showResult(g3Good, g3Bad, isCorrect, `✅ ${q.explanation}`, `❌ ${q.explanation}`);
                         game3Done = true;
                         document.getElementById('game3Next').style.display = 'inline-block';
                     };
                     container.appendChild(btn);
                 });
                 game3Done = false;
-                g3Good.style.display = 'none';
-                g3Bad.style.display = 'none';
+                g3Good.style.display = 'none'; g3Bad.style.display = 'none';
                 document.getElementById('game3Next').style.display = 'none';
+                document.getElementById('game3Card').style.display = 'block';
             }
-            function nextGame3() {
-                game3Index++;
-                if (game3Index < game3Data.length) renderGame3();
-                else { document.getElementById('game3Next').style.display = 'none'; showResult(g3Good, g3Bad, true, '🎉 Ты отлично находишь причины!', ''); }
-            }
-            document.getElementById('game3Next').onclick = nextGame3;
-            renderGame3();
-
-            // ========== ИГРА 4: ЧТО ОБЩЕЕ? ==========
+            document.getElementById('game3Next').onclick = () => { game3Index++; if (game3Index < game3Data.length) renderGame3(); else { document.getElementById('game3Card').style.display = 'none'; renderGame4(); } };
+            
+            // ИГРА 4
             const game4Data = [
-                { items: "🍎 🍌 🍒", options: ["Фрукты 🍎", "Овощи", "Игрушки"], correct: 0, explanation: "Это всё фрукты." },
-                { items: "🐱 🐶 🐭", options: ["Птицы", "Животные 🐱", "Насекомые"], correct: 1, explanation: "Это всё животные." },
-                { items: "✏️ 📖 🎒", options: ["Еда", "Игрушки", "Школьные вещи ✏️"], correct: 2, explanation: "Это всё для школы." },
+                { items: "🍎 🍌 🍒", options: ["🍎 Фрукты", "🥕 Овощи", "🧸 Игрушки"], correct: 0, explanation: "Это фрукты!" },
+                { items: "🐱 🐶 🐭", options: ["🦅 Птицы", "🐱 Животные", "🐜 Насекомые"], correct: 1, explanation: "Это животные!" },
+                { items: "✏️ 📖 🎒", options: ["🍕 Еда", "🧸 Игрушки", "✏️ Школа"], correct: 2, explanation: "Это для школы!" },
             ];
             let game4Index = 0, game4Done = false;
             const g4Good = document.getElementById('game4Feedback');
@@ -332,31 +401,25 @@
                     btn.onclick = () => {
                         if (game4Done) return;
                         const isCorrect = (idx === q.correct);
-                        showResult(g4Good, g4Bad, isCorrect, `✅ Правильно! ${q.explanation}`, `❌ Неправильно! ${q.explanation}`);
+                        showResult(g4Good, g4Bad, isCorrect, `✅ ${q.explanation}`, `❌ ${q.explanation}`);
                         game4Done = true;
                         document.getElementById('game4Next').style.display = 'inline-block';
                     };
                     container.appendChild(btn);
                 });
                 game4Done = false;
-                g4Good.style.display = 'none';
-                g4Bad.style.display = 'none';
+                g4Good.style.display = 'none'; g4Bad.style.display = 'none';
                 document.getElementById('game4Next').style.display = 'none';
+                document.getElementById('game4Card').style.display = 'block';
             }
-            function nextGame4() {
-                game4Index++;
-                if (game4Index < game4Data.length) renderGame4();
-                else { document.getElementById('game4Next').style.display = 'none'; showResult(g4Good, g4Bad, true, '🎉 Ты умеешь находить общее!', ''); }
-            }
-            document.getElementById('game4Next').onclick = nextGame4;
-            renderGame4();
-
-            // ========== ИГРА 5: ПРАВДА ИЛИ ОБМАН? ==========
+            document.getElementById('game4Next').onclick = () => { game4Index++; if (game4Index < game4Data.length) renderGame4(); else { document.getElementById('game4Card').style.display = 'none'; renderGame5(); } };
+            
+            // ИГРА 5
             const game5Data = [
-                { text: "Рыбы умеют летать по небу 🐟", correct: false, explanation: "Обман! Рыбы плавают в воде." },
-                { text: "Зимой идёт снег ❄️", correct: true, explanation: "Правда! Зимой выпадает снег." },
-                { text: "Собаки умеют лаять 🐕", correct: true, explanation: "Правда! Собаки лают." },
-                { text: "Человек может дышать под водой без трубки", correct: false, explanation: "Обман! Человеку нужен акваланг." },
+                { text: "🐟 Рыбы умеют летать", correct: false, explanation: "Рыбы плавают." },
+                { text: "❄️ Зимой идёт снег", correct: true, explanation: "Зимой снег." },
+                { text: "🐕 Собаки умеют лаять", correct: true, explanation: "Собаки лают." },
+                { text: "👤 Человек дышит под водой", correct: false, explanation: "Нужен акваланг." },
             ];
             let game5Index = 0, game5Done = false;
             const g5Good = document.getElementById('game5Feedback');
@@ -364,32 +427,31 @@
             function renderGame5() {
                 document.getElementById('game5Question').innerHTML = game5Data[game5Index].text;
                 game5Done = false;
-                g5Good.style.display = 'none';
-                g5Bad.style.display = 'none';
+                g5Good.style.display = 'none'; g5Bad.style.display = 'none';
                 document.getElementById('game5Next').style.display = 'none';
+                document.getElementById('game5Card').style.display = 'block';
             }
             function checkGame5(ans) {
                 if (game5Done) return;
                 const q = game5Data[game5Index];
                 const isCorrect = (ans === 'true' && q.correct === true) || (ans === 'false' && q.correct === false);
-                showResult(g5Good, g5Bad, isCorrect, `✅ Правильно! ${q.explanation}`, `❌ Неправильно! ${q.explanation}`);
+                showResult(g5Good, g5Bad, isCorrect, `✅ ${q.explanation}`, `❌ ${q.explanation}`);
                 game5Done = true;
                 document.getElementById('game5Next').style.display = 'inline-block';
             }
             function nextGame5() {
                 game5Index++;
                 if (game5Index < game5Data.length) renderGame5();
-                else { document.getElementById('game5Next').style.display = 'none'; showResult(g5Good, g5Bad, true, '🎉 Ты хорошо проверяешь информацию!', ''); }
+                else { document.getElementById('game5Card').style.display = 'none'; renderGame6(); }
             }
             document.querySelectorAll('#game5Question + div .simple-option').forEach(btn => btn.onclick = () => checkGame5(btn.dataset.ans));
             document.getElementById('game5Next').onclick = nextGame5;
-            renderGame5();
-
-            // ========== ИГРА 6: ЧТО ЛИШНЕЕ? ==========
+            
+            // ИГРА 6
             const game6Data = [
-                { items: ["🍎", "🍌", "🍒", "✏️"], correct: 3, explanation: "Лишняя ручка! Остальное — фрукты." },
-                { items: ["🐱", "🐶", "🐭", "☁️"], correct: 3, explanation: "Лишнее облако! Остальное — животные." },
-                { items: ["🚗", "🚲", "✈️", "🐘"], correct: 3, explanation: "Лишний слон! Остальное — транспорт." },
+                { items: ["🍎", "🍌", "🍒", "✏️"], correct: 3, explanation: "Лишняя ручка!" },
+                { items: ["🐱", "🐶", "🐭", "☁️"], correct: 3, explanation: "Лишнее облако!" },
+                { items: ["🚗", "🚲", "✈️", "🐘"], correct: 3, explanation: "Лишний слон!" },
             ];
             let game6Index = 0, game6Done = false;
             const g6Good = document.getElementById('game6Feedback');
@@ -405,29 +467,23 @@
                     btn.onclick = () => {
                         if (game6Done) return;
                         const isCorrect = (idx === q.correct);
-                        showResult(g6Good, g6Bad, isCorrect, `✅ Правильно! ${q.explanation}`, `❌ Неправильно! ${q.explanation}`);
+                        showResult(g6Good, g6Bad, isCorrect, `✅ ${q.explanation}`, `❌ ${q.explanation}`);
                         game6Done = true;
                         document.getElementById('game6Next').style.display = 'inline-block';
                     };
                     container.appendChild(btn);
                 });
                 game6Done = false;
-                g6Good.style.display = 'none';
-                g6Bad.style.display = 'none';
+                g6Good.style.display = 'none'; g6Bad.style.display = 'none';
                 document.getElementById('game6Next').style.display = 'none';
+                document.getElementById('game6Card').style.display = 'block';
             }
-            function nextGame6() {
-                game6Index++;
-                if (game6Index < game6Data.length) renderGame6();
-                else { document.getElementById('game6Next').style.display = 'none'; showResult(g6Good, g6Bad, true, '🎉 Отлично! Ты находишь лишнее!', ''); }
-            }
-            document.getElementById('game6Next').onclick = nextGame6;
-            renderGame6();
-
-            // ========== ИГРА 7: КТО ПРАВ? ==========
+            document.getElementById('game6Next').onclick = () => { game6Index++; if (game6Index < game6Data.length) renderGame6(); else { document.getElementById('game6Card').style.display = 'none'; renderGame7(); } };
+            
+            // ИГРА 7
             const game7Data = [
-                { story: "Маша говорит: «Все кошки белые». А Петя говорит: «Бывают чёрные и рыжие кошки».", options: ["Права Маша", "Прав Петя 🐱", "Оба правы"], correct: 1, explanation: "Прав Петя! Кошки бывают разного цвета." },
-                { story: "Лена думает: «Если я надену красную шапку, я получу пятёрку». А Дима говорит: «Чтобы получить пятёрку, нужно учить уроки».", options: ["Права Лена", "Прав Дима 📚", "Оба правы"], correct: 1, explanation: "Прав Дима! Оценка зависит от знаний, а не от шапки." },
+                { story: "Маша: «Все кошки белые». Петя: «Бывают чёрные и рыжие».", options: ["Права Маша", "Прав Петя 🐱", "Оба правы"], correct: 1, explanation: "Прав Петя!" },
+                { story: "Лена: «Красная шапка принесёт пятёрку». Дима: «Нужно учить уроки».", options: ["Права Лена", "Прав Дима 📚", "Оба правы"], correct: 1, explanation: "Прав Дима!" },
             ];
             let game7Index = 0, game7Done = false;
             const g7Good = document.getElementById('game7Feedback');
@@ -444,29 +500,23 @@
                     btn.onclick = () => {
                         if (game7Done) return;
                         const isCorrect = (idx === q.correct);
-                        showResult(g7Good, g7Bad, isCorrect, `✅ Правильно! ${q.explanation}`, `❌ Неправильно! ${q.explanation}`);
+                        showResult(g7Good, g7Bad, isCorrect, `✅ ${q.explanation}`, `❌ ${q.explanation}`);
                         game7Done = true;
                         document.getElementById('game7Next').style.display = 'inline-block';
                     };
                     container.appendChild(btn);
                 });
                 game7Done = false;
-                g7Good.style.display = 'none';
-                g7Bad.style.display = 'none';
+                g7Good.style.display = 'none'; g7Bad.style.display = 'none';
                 document.getElementById('game7Next').style.display = 'none';
+                document.getElementById('game7Card').style.display = 'block';
             }
-            function nextGame7() {
-                game7Index++;
-                if (game7Index < game7Data.length) renderGame7();
-                else { document.getElementById('game7Next').style.display = 'none'; showResult(g7Good, g7Bad, true, '🎉 Ты умеешь находить правильные рассуждения!', ''); }
-            }
-            document.getElementById('game7Next').onclick = nextGame7;
-            renderGame7();
-
-            // ========== ИГРА 8: ЧТО БУДЕТ ДАЛЬШЕ? ==========
+            document.getElementById('game7Next').onclick = () => { game7Index++; if (game7Index < game7Data.length) renderGame7(); else { document.getElementById('game7Card').style.display = 'none'; renderGame8(); } };
+            
+            // ИГРА 8
             const game8Data = [
-                { story: "Коля не сделал домашнее задание.", options: ["Его похвалят", "Его попросят сделать позже 📝", "Ему купят игрушку"], correct: 1, explanation: "Учитель попросит сделать задание." },
-                { story: "На улице пошёл сильный дождь, а Маша забыла зонт.", options: ["Она промокнет ☔", "Она высохнет", "Она полетит"], correct: 0, explanation: "Без зонта Маша промокнет под дождём." },
+                { story: "Коля не сделал домашнее задание.", options: ["Похвалят", "Попросят сделать позже 📝", "Купят игрушку"], correct: 1, explanation: "Учитель попросит сделать." },
+                { story: "Сильный дождь, Маша забыла зонт.", options: ["Промокнет ☔", "Высохнет", "Полетит"], correct: 0, explanation: "Без зонта промокнет." },
             ];
             let game8Index = 0, game8Done = false;
             const g8Good = document.getElementById('game8Feedback');
@@ -483,24 +533,93 @@
                     btn.onclick = () => {
                         if (game8Done) return;
                         const isCorrect = (idx === q.correct);
-                        showResult(g8Good, g8Bad, isCorrect, `✅ Правильно! ${q.explanation}`, `❌ Неправильно! ${q.explanation}`);
+                        showResult(g8Good, g8Bad, isCorrect, `✅ ${q.explanation}`, `❌ ${q.explanation}`);
                         game8Done = true;
                         document.getElementById('game8Next').style.display = 'inline-block';
                     };
                     container.appendChild(btn);
                 });
                 game8Done = false;
-                g8Good.style.display = 'none';
-                g8Bad.style.display = 'none';
+                g8Good.style.display = 'none'; g8Bad.style.display = 'none';
                 document.getElementById('game8Next').style.display = 'none';
+                document.getElementById('game8Card').style.display = 'block';
             }
-            function nextGame8() {
-                game8Index++;
-                if (game8Index < game8Data.length) renderGame8();
-                else { document.getElementById('game8Next').style.display = 'none'; showResult(g8Good, g8Bad, true, '🎉 Ты настоящий мыслитель!', ''); }
+            document.getElementById('game8Next').onclick = () => { game8Index++; if (game8Index < game8Data.length) renderGame8(); else { document.getElementById('game8Card').style.display = 'none'; renderGame9(); } };
+            
+            // ИГРА 9: ВИЖУ. ДУМАЮ. УДИВЛЯЮСЬ
+            const game9Data = [
+                { image: "❓", description: "Что это может быть? На картинке загадка!" },
+                { image: "🌳✨", description: "Что происходит на этой картинке?" },
+                { image: "🐜➡️🍃", description: "Куда движется муравей и зачем?" }
+            ];
+            let game9Index = 0, game9Completed = false;
+            const g9Good = document.getElementById('game9Feedback');
+            const g9Bad = document.getElementById('game9FeedbackBad');
+            
+            function renderGame9() {
+                const q = game9Data[game9Index];
+                const container = document.getElementById('game9Container');
+                container.innerHTML = `
+                    <div class="see-think-wonder-card">
+                        <div class="see-think-wonder-image">${q.image}</div>
+                        <p style="font-size: 1.1rem; margin-bottom: 15px;"><strong>${q.description}</strong></p>
+                        <div class="stw-questions">
+                            <div class="stw-question">
+                                <h4>👁️ ВИЖУ</h4>
+                                <textarea id="seeInput" class="stw-input" rows="2" placeholder="Что ты видишь? Опиши детали..."></textarea>
+                                <div class="stw-example" onclick="document.getElementById('seeInput').value = 'Я вижу дерево, солнце и муравья.'">📋 Пример</div>
+                            </div>
+                            <div class="stw-question">
+                                <h4>💭 ДУМАЮ</h4>
+                                <textarea id="thinkInput" class="stw-input" rows="2" placeholder="Что ты думаешь? Какие идеи?..."></textarea>
+                                <div class="stw-example" onclick="document.getElementById('thinkInput').value = 'Я думаю, муравей ищет еду.'">📋 Пример</div>
+                            </div>
+                            <div class="stw-question">
+                                <h4>🤔 УДИВЛЯЮСЬ</h4>
+                                <textarea id="wonderInput" class="stw-input" rows="2" placeholder="Что тебя удивляет? О чём хочешь узнать?..."></textarea>
+                                <div class="stw-example" onclick="document.getElementById('wonderInput').value = 'Интересно, сколько муравьёв в муравейнике?'">📋 Пример</div>
+                            </div>
+                        </div>
+                        <button id="submitStw" class="simple-btn" style="margin-top: 20px;">🎯 Отправить ответы</button>
+                    </div>
+                `;
+                document.getElementById('submitStw').onclick = () => {
+                    const see = document.getElementById('seeInput')?.value.trim() || '';
+                    const think = document.getElementById('thinkInput')?.value.trim() || '';
+                    const wonder = document.getElementById('wonderInput')?.value.trim() || '';
+                    if (see && think && wonder) {
+                        showResult(g9Good, g9Bad, true, '🎉 Отлично! Ты хорошо понаблюдал(а) и подумал(а)!', '');
+                        game9Completed = true;
+                        document.getElementById('game9Next').style.display = 'inline-block';
+                    } else {
+                        showResult(g9Good, g9Bad, false, '', '⚠️ Заполни все три поля!');
+                    }
+                };
+                game9Completed = false;
+                g9Good.style.display = 'none'; g9Bad.style.display = 'none';
+                document.getElementById('game9Next').style.display = 'none';
+                document.getElementById('game9Card').style.display = 'block';
             }
-            document.getElementById('game8Next').onclick = nextGame8;
-            renderGame8();
+            function nextGame9() {
+                game9Index++;
+                if (game9Index < game9Data.length) renderGame9();
+                else { document.getElementById('game9Card').style.display = 'none'; document.getElementById('finishCard').style.display = 'block'; }
+            }
+            document.getElementById('game9Next').onclick = nextGame9;
+            
+            // ЗАПУСК
+            document.getElementById('game1Card').style.display = 'block';
+            document.getElementById('game2Card').style.display = 'none';
+            document.getElementById('game3Card').style.display = 'none';
+            document.getElementById('game4Card').style.display = 'none';
+            document.getElementById('game5Card').style.display = 'none';
+            document.getElementById('game6Card').style.display = 'none';
+            document.getElementById('game7Card').style.display = 'none';
+            document.getElementById('game8Card').style.display = 'none';
+            document.getElementById('game9Card').style.display = 'none';
+            document.getElementById('finishCard').style.display = 'none';
+            renderGame1();
+            renderGame9();
         })();
     </script>
 </body>
