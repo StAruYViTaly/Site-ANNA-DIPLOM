@@ -6,6 +6,54 @@
     <title>Методики | Критическое мышление</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="brain-icon.png">
+    <style>
+        /* Дополнительные стили для новых методик */
+        .fishbone-example {
+            background: linear-gradient(135deg, #f0f2f5, #e8ecf5);
+            border-radius: var(--border-radius-sm);
+            padding: 20px;
+            margin-top: 25px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        .see-think-wonder {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+        .stw-card {
+            flex: 1;
+            min-width: 150px;
+            background: var(--gray);
+            border-radius: var(--border-radius-sm);
+            padding: 20px 15px;
+            text-align: center;
+            transition: var(--transition);
+        }
+        .stw-card:hover {
+            transform: translateY(-5px);
+            background: white;
+            box-shadow: var(--box-shadow);
+        }
+        .stw-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+        }
+        .stw-card p {
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        .stw-card .emoji-big {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+        @media (max-width: 768px) {
+            .see-think-wonder { flex-direction: column; }
+        }
+    </style>
 </head>
 <body>
     <header class="header">
@@ -32,26 +80,33 @@
                 <h2 class="section-title">Методики и техники</h2>
                 <h3 class="section-title1">(страница для родителей)</h3>
                 
+                <!-- 1. МЕТОД "РЫБЬЯ КОСТЬ" (вместо Сократического) -->
                 <div class="method-card">
                     <div class="method-content">
-                        <h3>Сократический метод</h3>
-                        <p>Техника задавания вопросов для стимулирования критического мышления и выявления идей, лежащих в основе убеждений.</p>
+                        <h3>🐟 Диаграмма «Рыбья кость» (Исикавы)</h3>
+                        <p>Метод для поиска корневых причин проблемы. Позволяет структурировать все возможные причины и увидеть связи между ними.</p>
                         <ul class="method-steps">
-                            <li>Задавайте уточняющие вопросы</li>
-                            <li>Ищите доказательства и обоснования</li>
-                            <li>Рассматривайте альтернативные точки зрения</li>
-                            <li>Анализируйте последствия</li>
+                            <li><strong>Голова</strong> – формулируем проблему (результат)</li>
+                            <li><strong>Хребет</strong> – основная стрелка, на которой держатся причины</li>
+                            <li><strong>Крупные кости</strong> – основные категории причин (люди, методы, материалы, среда)</li>
+                            <li><strong>Мелкие кости</strong> – конкретные причины внутри каждой категории</li>
+                            <li><strong>Анализ</strong> – выделяем самые важные коренные причины</li>
                         </ul>
+                        <div class="fishbone-example">
+                            📌 <strong>Пример:</strong> Проблема «Ребёнок не хочет делать уроки» → причины: усталость, непонимание темы, отвлекающие факторы, отсутствие мотивации.
+                        </div>
                     </div>
                     <div class="method-image">
                         <div class="aboute-image">
+                            <!-- Здесь можно добавить картинку схематичной рыбьей кости, но для простоты оставляем -->
                         </div>
                     </div>
                 </div>
 
+                <!-- 2. ШЕСТЬ ШЛЯП МЫШЛЕНИЯ (остаётся без изменений) -->
                 <div class="method-card reverse">
                     <div class="method-content">
-                        <h3>Шесть шляп мышления</h3>
+                        <h3>🎩 Шесть шляп мышления</h3>
                         <p>Метод Эдварда де Боно, который позволяет рассмотреть проблему с шести различных перспектив.</p>
                         <div class="hats-grid">
                             <div class="hat-card" style="background-color: #808080;">
@@ -82,64 +137,70 @@
                     </div>
                 </div>
 
+                <!-- 3. МЕТОД "ВИЖУ. ДУМАЮ. УДИВЛЯЮСЬ" (вместо SWOT) -->
                 <div class="method-card">
                     <div class="method-content">
-                        <h3>SWOT-анализ</h3>
-                        <p>Стратегический метод оценки сильных и слабых сторон, возможностей и угроз.</p>
-                        <div class="swot-grid">
-                            <div class="swot-card strengths">
-                                <h4>Сильные стороны</h4>
-                                <p>Внутренние положительные качества</p>
+                        <h3>👁️ Вижу. Думаю. Удивляюсь (See-Think-Wonder)</h3>
+                        <p>Техника визуального мышления, которая помогает анализировать изображения, ситуации или явления без поспешных выводов.</p>
+                        <div class="see-think-wonder">
+                            <div class="stw-card">
+                                <div class="emoji-big">👁️</div>
+                                <h4>Вижу</h4>
+                                <p>Что я замечаю? Какие детали, факты, объекты? (Только наблюдение, без интерпретаций)</p>
                             </div>
-                            <div class="swot-card weaknesses">
-                                <h4>Слабые стороны</h4>
-                                <p>Внутренние отрицательные качества</p>
+                            <div class="stw-card">
+                                <div class="emoji-big">💭</div>
+                                <h4>Думаю</h4>
+                                <p>Что я об этом думаю? Какие идеи, гипотезы, ассоциации возникают?</p>
                             </div>
-                            <div class="swot-card opportunities">
-                                <h4>Возможности</h4>
-                                <p>Внешние благоприятные факторы</p>
+                            <div class="stw-card">
+                                <div class="emoji-big">🤔</div>
+                                <h4>Удивляюсь</h4>
+                                <p>Что меня удивляет? О чём хочется узнать больше? Какие вопросы возникают?</p>
                             </div>
-                            <div class="swot-card threats">
-                                <h4>Угрозы</h4>
-                                <p>Внешние неблагоприятные факторы</p>
-                            </div>
+                        </div>
+                        <div class="fishbone-example" style="margin-top: 20px;">
+                            📌 <strong>Пример с картинкой природы:</strong><br>
+                            👁️ Вижу: зелёное дерево, голубое небо, птицу.<br>
+                            💭 Думаю: наступила весна, птица вьёт гнездо.<br>
+                            🤔 Удивляюсь: почему листья такие яркие? Куда летит птица?
                         </div>
                     </div>
                 </div>
 
-                <!-- НОВЫЙ БЛОК: Рекомендации для родителей -->
+                <!-- БЛОК РЕКОМЕНДАЦИЙ ДЛЯ РОДИТЕЛЕЙ (остаётся без изменений) -->
                 <div class="parents-tips">
                     <h2 class="section-title">👪 Рекомендации для родителей</h2>
                     <div class="tips-grid">
                         <div class="tip-card">
                             <div class="tip-icon">🗣️</div>
                             <h3>Задавайте открытые вопросы</h3>
-                            <p>Вместо «Тебе понравилось?» спросите «Что ты думаешь об этом? Почему?». Это развивает самостоятельность мышления.</p>
+                            <p>Вместо «Тебе понравилось?» спросите «Что ты думаешь об этом? Почему?».</p>
                         </div>
                         <div class="tip-card">
                             <div class="tip-icon">📖</div>
                             <h3>Читайте и обсуждайте вместе</h3>
-                            <p>После прочтения книги или новости спросите: «Как ты думаешь, почему герой поступил так? А что бы сделал ты?»</p>
+                            <p>После прочтения книги спросите: «Как ты думаешь, почему герой поступил так?»</p>
                         </div>
                         <div class="tip-card">
                             <div class="tip-icon">🎲</div>
                             <h3>Играйте в логические игры</h3>
-                            <p>Шахматы, головоломки, «Мафия», «Кодовые имена» — отлично тренируют анализ и стратегическое мышление.</p>
+                            <p>Шахматы, головоломки, «Мафия» — отлично тренируют анализ.</p>
                         </div>
                         <div class="tip-card">
                             <div class="tip-icon">📱</div>
                             <h3>Разбирайте новости и рекламу</h3>
-                            <p>Спрашивайте: «Кто написал эту статью? Зачем? Какие факты подтверждают это утверждение?»</p>
+                            <p>Спрашивайте: «Кто написал? Зачем? Какие факты?»</p>
                         </div>
                         <div class="tip-card">
                             <div class="tip-icon">🤝</div>
                             <h3>Учите аргументировать</h3>
-                            <p>Попросите ребёнка отстаивать своё мнение с фактами, а не только с «потому что я так хочу».</p>
+                            <p>Пусть ребёнок отстаивает мнение с фактами.</p>
                         </div>
                         <div class="tip-card">
                             <div class="tip-icon">🌈</div>
                             <h3>Показывайте многогранность мира</h3>
-                            <p>Обсуждайте, что у любой проблемы есть несколько точек зрения, и все они могут иметь право на существование.</p>
+                            <p>У любой проблемы есть несколько точек зрения.</p>
                         </div>
                     </div>
                 </div>
